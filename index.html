@@ -729,6 +729,8 @@
 
   .carousel-img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: none;
     opacity: 0;
     transition: opacity 0.5s ease;
@@ -946,8 +948,23 @@
 
     <!-- FILIPINA FUSION -->
     <div class="card" data-cat="filipina" data-id="2">
-      <div class="card-img">
-        <!-- <img src="FOTO_FUSION.jpg" alt="Filipina Fusion"> -->
+      <div class="card-img carousel-container">
+        <div class="carousel">
+          <img src="Fotos/Fusion/Fusion1.JPG" alt="Filipina Fusion" class="carousel-img active">
+          <img src="Fotos/Fusion/Fusion2.JPG" alt="Filipina Fusion" class="carousel-img">
+          <img src="Fotos/Fusion/Fusion3.jpg" alt="Filipina Fusion" class="carousel-img">
+          <img src="Fotos/Fusion/Fusion4.jpg" alt="Filipina Fusion" class="carousel-img">
+          <img src="Fotos/Fusion/Fusion5.jpg" alt="Filipina Fusion" class="carousel-img">
+        </div>
+        <button class="carousel-btn prev">❮</button>
+        <button class="carousel-btn next">❯</button>
+        <div class="carousel-dots">
+          <span class="dot active" data-slide="0"></span>
+          <span class="dot" data-slide="1"></span>
+          <span class="dot" data-slide="2"></span>
+          <span class="dot" data-slide="3"></span>
+          <span class="dot" data-slide="4"></span>
+        </div>
         <div class="img-ph">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.57a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.57a2 2 0 00-1.34-2.23z"/></svg>
           <span>Foto propia</span>
@@ -1519,6 +1536,28 @@ function openModal(id) {
       dot.dataset.slide = i - 1;
       mCarouselDots.appendChild(dot);
     }
+    
+    // Inicializar carrusel del modal
+    initModalCarousel();
+  } else if(id === 2) {
+    // Mostrar carrusel para Filipina Fusion (5 fotos)
+    mCarousel.innerHTML = '';
+    mCarouselDots.innerHTML = '';
+    mImgPlaceholder.style.display = 'none';
+    
+    const fusionPhotos = ['Fusion1.JPG', 'Fusion2.JPG', 'Fusion3.jpg', 'Fusion4.jpg', 'Fusion5.jpg'];
+    fusionPhotos.forEach((photo, i) => {
+      const img = document.createElement('img');
+      img.src = 'Fotos/Fusion/' + photo;
+      img.alt = 'Filipina Fusion';
+      img.className = 'carousel-img' + (i === 0 ? ' active' : '');
+      mCarousel.appendChild(img);
+      
+      const dot = document.createElement('span');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.dataset.slide = i;
+      mCarouselDots.appendChild(dot);
+    });
     
     // Inicializar carrusel del modal
     initModalCarousel();
